@@ -1,7 +1,9 @@
 
 
 import { commonAPI } from "./commonAPI";
-import { serverURL } from "./serverURL";
+// import { serverURL } from "./serverURL";
+import serverURL from "./serverURL";
+
 
 // Helper to get token header
 const authHeader = () => {
