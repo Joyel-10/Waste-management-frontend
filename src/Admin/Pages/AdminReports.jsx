@@ -35,13 +35,13 @@ function AdminComplaints() {
   const fetchComplaints = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:4000/api/complaints/all"
+        "https://waste-management-2-xsa0.onrender.com/api/complaints/all"
       );
       setComplaints(res.data.complaints);
       setFiltered(res.data.complaints);
     } catch (err) {
       console.error("Fetch error:", err);
-      alert("Failed to fetch complaints");
+       toast.error("Failed to fetch complaints");
     } finally {
       setLoading(false);
     }
@@ -75,13 +75,13 @@ function AdminComplaints() {
 
     try {
       await axios.delete(
-        `http://localhost:4000/api/complaints/delete/${id}`
+        `https://waste-management-2-xsa0.onrender.com/api/complaints/delete/${id}`
       );
       setComplaints(complaints.filter((c) => c._id !== id));
-      alert("Complaint deleted");
+      toast.success("Complaint deleted");
     } catch (err) {
       console.error(err);
-      alert("Delete failed");
+       toast.error("Delete failed");
     }
   };
 
@@ -91,7 +91,7 @@ function AdminComplaints() {
 
     try {
       await axios.put(
-        `http://localhost:4000/api/complaints/update/${selectedComplaint._id}`,
+        `https://waste-management-2-xsa0.onrender.com/api/complaints/update/${selectedComplaint._id}`,
         updateData
       );
 
@@ -105,10 +105,10 @@ function AdminComplaints() {
 
       setShowUpdateModal(false);
       setSelectedComplaint(null);
-      alert("Complaint updated");
+      toast.success("Complaint updated");
     } catch (err) {
       console.error(err);
-      alert("Update failed");
+       toast.error("Update failed");
     }
   };
 

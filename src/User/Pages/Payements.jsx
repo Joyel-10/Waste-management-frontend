@@ -34,7 +34,7 @@ const Payments = () => {
         try {
             
             const summaryRes = await axios.get(
-                `http://localhost:4000/api/payment/summary/${userId}`
+                `https://waste-management-2-xsa0.onrender.com/api/payment/summary/${userId}`
             );
             if (summaryRes.data.success) {
                 setBalance(summaryRes.data.balance || 0);
@@ -43,13 +43,13 @@ const Payments = () => {
 
             // PAYMENT METHODS
             const methodRes = await axios.get(
-                `http://localhost:4000/api/payment/methods/${userId}`
+                `https://waste-management-2-xsa0.onrender.com/api/payment/methods/${userId}`
             );
             if (methodRes.data.success) setPaymentMethods(methodRes.data.methods || []);
 
             // PAYMENT HISTORY
             const historyRes = await axios.get(
-                `http://localhost:4000/api/pickup/payment-history/${userId}`
+                `https://waste-management-2-xsa0.onrender.com/api/pickup/payment-history/${userId}`
             );
             if (historyRes.data.success) {
                 const formatted = historyRes.data.payments.map((item) => ({
@@ -71,12 +71,12 @@ const Payments = () => {
         if (!userId) return;
 
         if (!newCard.cardNumber || !newCard.cardHolder || !newCard.expiryDate || !newCard.cvv) {
-            alert("All fields are required!");
+             toast.error("All fields are required!");
             return;
         }
 
         try {
-            const res = await axios.post("http://localhost:4000/api/payment/add-method", {
+            const res = await axios.post("https://waste-management-2-xsa0.onrender.com/api/payment/add-method", {
                 userId,
                 ...newCard,
             });

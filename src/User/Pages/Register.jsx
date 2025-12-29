@@ -20,7 +20,7 @@ const Register = () => {
         const { name, username, email, password } = userDetails;
 
         if (!name || !username || !email || !password) {
-            alert("Fill all the fields");
+             toast.error("Fill all the fields");
             return;
         }
 
@@ -29,13 +29,13 @@ const Register = () => {
             console.log(result);
 
             if (result.status === 201) {
-                alert("Registered Successfully");
+                toast.success("Registered Successfully");
                 setUserDetails({ name: "", username: "", email: "", password: "" });
                 navigate("/login");
             } else if (result.status === 409) {
-                alert(result.response?.data?.message || "User already exists");
+                 toast.error(result.response?.data?.message || "User already exists");
             } else {
-                alert(result.response?.data?.message || "Something went wrong");
+                 toast.error(result.response?.data?.message || "Something went wrong");
             }
         } catch (error) {
             console.error(error);

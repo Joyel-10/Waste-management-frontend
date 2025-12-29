@@ -3,7 +3,7 @@ import AppSidebar from "../Components/AdSideBar";
 import axios from "axios";
 import { FiSearch, FiEdit, FiTrash2, FiEye, FiX, FiCalendar, FiClock, FiPackage, FiDollarSign, FiUser, FiMail, FiAlertTriangle } from "react-icons/fi";
 
-const BASE = "http://localhost:4000/api/pickup";
+const BASE = "https://waste-management-2-xsa0.onrender.com/api/pickup";
 
 function AdminPickup() {
   const [pickups, setPickups] = useState([]);
@@ -132,15 +132,15 @@ function AdminPickup() {
       const res = await axios.put(`${BASE}/${id}`, payload);
 
       if (res.data.success) {
-        alert("Pickup updated successfully.");
+        toast.success("Pickup updated successfully.");
         closeEdit();
         fetchPickups();
       } else {
-        alert("Update failed.");
+         toast.error("Update failed.");
       }
     } catch (err) {
       console.error("Save edit error:", err);
-      alert("Failed to update pickup.");
+       toast.error("Failed to update pickup.");
     }
   };
 
@@ -150,11 +150,11 @@ function AdminPickup() {
 
       if (res.data.success) {
         fetchPickups();
-        alert("Status updated successfully.");
+        toast.success("Status updated successfully.");
       }
     } catch (err) {
       console.error("Status update error:", err);
-      alert("Failed to update status.");
+       toast.error("Failed to update status.");
     }
   };
 
@@ -171,13 +171,13 @@ function AdminPickup() {
       const res = await axios.delete(`${BASE}/${deleting._id}`);
 
       if (res.data.success) {
-        alert("Pickup deleted successfully.");
+        toast.success("Pickup deleted successfully.");
         closeDeleteModal();
         fetchPickups();
       }
     } catch (err) {
       console.error("Delete error:", err);
-      alert("Failed to delete pickup.");
+       toast.error("Failed to delete pickup.");
     }
   };
 

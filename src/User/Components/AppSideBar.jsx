@@ -22,7 +22,7 @@ function AppSidebar() {
 
     { path: '/pickup-history', icon: <FaTrashAlt />, label: 'History', color: 'from-green-500 to-emerald-600', hover: 'hover:bg-green-600', shadow: 'hover:shadow-green-400/40', text: 'text-green-300' },
 
-    { path: '/payments', icon: <FaWallet />, label: 'Payments', color: 'from-yellow-500 to-orange-600', hover: 'hover:bg-yellow-600', shadow: 'hover:shadow-yellow-400/40', text: 'text-yellow-300' },
+    { path: '/payements', icon: <FaWallet />, label: 'Payments', color: 'from-yellow-500 to-orange-600', hover: 'hover:bg-yellow-600', shadow: 'hover:shadow-yellow-400/40', text: 'text-yellow-300' },
 
     { path: '/complaints', icon: <FaExclamationCircle />, label: 'Complaints', color: 'from-red-500 to-rose-600', hover: 'hover:bg-red-600', shadow: 'hover:shadow-red-400/40', text: 'text-red-300' },
 

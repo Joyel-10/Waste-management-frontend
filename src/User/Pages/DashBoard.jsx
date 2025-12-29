@@ -37,7 +37,7 @@ const Dashboard = () => {
         const fetchDashboardData = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:4000/api/user/dashboard/${userId}`
+                    `https://waste-management-2-xsa0.onrender.com/api/user/dashboard/${userId}`
                 );
 
                 if (res.data.user) setUser(res.data.user);

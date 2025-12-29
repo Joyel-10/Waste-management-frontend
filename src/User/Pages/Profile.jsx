@@ -16,7 +16,7 @@ function Profile() {
     if (!userId) navigate("/login");
     const fetchProfile = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/profile/${userId}`);
+        const res = await axios.get(`https://waste-management-2-xsa0.onrender.com/api/profile/${userId}`);
         setUser(res.data.user);
       } catch (err) {
         console.error(err);
@@ -56,16 +56,16 @@ function Profile() {
     if (selectedImage) formData.append("profileImage", selectedImage);
 
     try {
-      const res = await axios.put(`http://localhost:4000/api/profile/${user._id}`, formData, {
+      const res = await axios.put(`https://waste-management-2-xsa0.onrender.com/api/profile/${user._id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setUser(res.data.user);
       setSelectedImage(null);
       setPreview(null);
-      alert("Profile updated successfully!");
+      toast.success("Profile updated successfully!");
     } catch (err) {
       console.error(err);
-      alert("Failed to update profile");
+       toast.error("Failed to update profile");
     }
   };
 
@@ -94,7 +94,7 @@ function Profile() {
                   preview
                     ? preview
                     : user.profileImage
-                      ? `http://localhost:4000/uploads/profiles/${user.profileImage}`
+                      ? `https://waste-management-2-xsa0.onrender.com/uploads/profiles/${user.profileImage}`
                       : "https://via.placeholder.com/120"
                 }
                 className="relative w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl ring-4 ring-blue-100 transition-transform duration-300 group-hover:scale-105"

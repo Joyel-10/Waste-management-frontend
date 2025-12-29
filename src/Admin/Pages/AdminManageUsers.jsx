@@ -15,7 +15,7 @@ import {
   FiRefreshCw,
 } from "react-icons/fi";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_URL = import.meta.env.VITE_API_URL || "https://waste-management-2-xsa0.onrender.com";
 
 function AdminManageUsers() {
   const [users, setUsers] = useState([]);

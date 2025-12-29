@@ -15,7 +15,7 @@ import {
   FiAlertCircle,
 } from "react-icons/fi";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_URL = import.meta.env.VITE_API_URL || "https://waste-management-2-xsa0.onrender.com";
 
 function AdminProfile() {
   const [admin, setAdmin] = useState(null);
@@ -34,7 +34,7 @@ function AdminProfile() {
 
   useEffect(() => {
     const fetchAdminProfile = async () => {
-      // Get token from sessionStorage
+     
       const token = sessionStorage.getItem("adminToken");
       
       console.log(" Checking token:", token ? "Found " : "Not found ");
@@ -48,7 +48,7 @@ function AdminProfile() {
       }
 
       try {
-        console.log("📡 Fetching profile from API...");
+        console.log(" Fetching profile from API...");
         
         const res = await axios.get(`${API_URL}/api/admin/profile`, {
           headers: {
@@ -100,7 +100,7 @@ function AdminProfile() {
       showToast("Profile updated successfully!", "success");
       setEditMode(false);
       
-      // Update sessionStorage
+     
       const storedData = JSON.parse(sessionStorage.getItem("adminData") || "{}");
       sessionStorage.setItem("adminData", JSON.stringify({...storedData, name: res.data.admin.name}));
     } catch (err) {
@@ -171,7 +171,7 @@ function AdminProfile() {
       <AppSidebar />
 
       <main className="flex-1 p-8">
-        {/* Header */}
+    
         <div className="mb-8 flex justify-between items-start">
           <div>
             <h1 className="text-4xl font-bold text-gray-800 mb-2 flex items-center gap-3">
@@ -186,7 +186,7 @@ function AdminProfile() {
        
         </div>
 
-        {/* Profile Card */}
+      
         <div className="max-w-4xl mx-auto">
           <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
             {/* Header Section */}
@@ -210,7 +210,6 @@ function AdminProfile() {
               <p className="text-blue-100">{admin.email}</p>
             </div>
 
-            {/* Form Section */}
             <div className="p-8 space-y-6">
               {/* Name Field */}
               <div className="space-y-2">

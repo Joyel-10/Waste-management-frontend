@@ -23,7 +23,7 @@ export const commonAPI = async (method, url, data = null, headers = {}) => {
     const response = await axios({
       method,
       url,
-      data,      // Important: pass body as 'data'
+      data,      
       headers: {
         "Content-Type": "application/json",
         ...headers,
@@ -32,6 +32,6 @@ export const commonAPI = async (method, url, data = null, headers = {}) => {
     return response;
   } catch (error) {
     console.error("API Error:", error.response?.data || error.message);
-    throw error; // rethrow so frontend can catch it
+    throw error; 
   }
 };

@@ -18,11 +18,10 @@ function PickupHistory() {
             navigate("/login");
             return;
         }
-
         const fetchHistory = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:4000/api/pickup/history/${userId}`
+                    `https://waste-management-2-xsa0.onrender.com/api/pickup/history/${userId}`
                 );
 
                 setPickupData(response.data.pickups || []);
@@ -40,10 +39,10 @@ function PickupHistory() {
     const handleCancel = async (pickup) => {
         try {
             await axios.delete(
-                `http://localhost:4000/api/pickup/cancel/${pickup.userId}`
+                `https://waste-management-2-xsa0.onrender.com/api/pickup/cancel/${pickup.userId}`
             );
 
-            alert("Pickup cancelled successfully!");
+            toast.success("Pickup cancelled successfully!");
             window.location.reload();
         } catch (err) {
             alert("Failed to cancel pickup");
@@ -65,7 +64,7 @@ function PickupHistory() {
 
     return (
         <>
-            {/* Main container */}
+           
             <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 pb-20 px-4 sm:px-6 lg:px-8 py-8 flex justify-center">
                 <div className="w-full max-w-4xl">
                     {/* Header */}
@@ -144,13 +143,12 @@ function PickupHistory() {
                                                 </div>
 
                                                 <span
-                                                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${
-                                                        pickup.status === "Completed"
+                                                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${pickup.status === "Completed"
                                                             ? "bg-emerald-100 text-emerald-700"
                                                             : pickup.status === "Cancelled"
-                                                            ? "bg-rose-100 text-rose-700"
-                                                            : "bg-amber-100 text-amber-700"
-                                                    }`}
+                                                                ? "bg-rose-100 text-rose-700"
+                                                                : "bg-amber-100 text-amber-700"
+                                                        }`}
                                                 >
                                                     {pickup.status}
                                                 </span>
@@ -187,7 +185,7 @@ function PickupHistory() {
                 </div>
             </div>
 
-          
+
             <AppSidebar />
         </>
     );

@@ -74,12 +74,12 @@ const Schedule = () => {
   const handleSchedule = async (e) => {
     e.preventDefault();
 
-    if (paymentMethod === "UPI" && !upiId) return alert("Enter UPI ID");
+    if (paymentMethod === "UPI" && !upiId) return toast.error("Enter UPI ID");
     if (
       paymentMethod === "Card" &&
       (!cardNumber || !expiry || !cvv)
     )
-      return alert("Enter card details");
+      return  toast.error("Enter card details");
 
     const paymentStatus =
       paymentMethod === "Cash on Pickup" ? "Pending" : "Settled";
@@ -109,23 +109,23 @@ const Schedule = () => {
 
       if (pickupFromState || scheduledPickup) {
         result = await reschedulePickupAPI(reqBody);
-        alert(
+        toast.success(
           paymentMethod === "Cash on Pickup"
-            ? "Pickup rescheduled (payment pending)"
-            : "Pickup rescheduled and payment marked settled"
+            ? "Pickup rescheduled"
+            : "Pickup rescheduled"
         );
       } else {
         result = await schedulePickupAPI(reqBody);
-        alert(
+        toast.success(
           paymentMethod === "Cash on Pickup"
-            ? "Pickup scheduled (payment pending)"
-            : "Pickup scheduled and payment marked settled"
+            ? "Pickup scheduled "
+            : "Pickup scheduled"
         );
       }
 
       navigate("/pickup-history");
     } catch (err) {
-      alert(
+       toast.error(
         err.response?.data?.message ||
         "Error scheduling/rescheduling pickup"
       );

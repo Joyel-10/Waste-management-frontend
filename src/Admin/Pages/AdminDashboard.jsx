@@ -13,7 +13,7 @@ function AdminDashboard() {
        const token = sessionStorage.getItem("adminToken");
 
 
-        const res = await fetch("http://localhost:4000/api/admin/dashboard", {
+        const res = await fetch("https://waste-management-2-xsa0.onrender.com/api/admin/dashboard", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

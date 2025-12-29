@@ -33,7 +33,7 @@ function AdRegister() {
         setLoading(true);
 
         try {
-            const response = await axios.post('http://localhost:4000/api/admin/register', {
+            const response = await axios.post('https://waste-management-2-xsa0.onrender.com/api/admin/register', {
                 name: formData.name,
                 email: formData.email,
                 password: formData.password
