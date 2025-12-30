@@ -97,8 +97,8 @@ function Profile() {
                   preview
                     ? preview
                     : user.profileImage
-                      ? `https://waste-management-2-xsa0.onrender.com/Uploads/profiles/${user.profileImage}`
-                      : "https://via.placeholder.com/120"
+                      ? `https://waste-management-2-xsa0.onrender.com/uploads/profiles/${user.profileImage}`
+                      : "/default-profile.png" 
                 }
                 className="relative w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl ring-4 ring-blue-100 transition-transform duration-300 group-hover:scale-105"
                
