@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import AppSidebar from "../Components/AppSideBar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+
+
 
 function Profile() {
   const [user, setUser] = useState({ name: "", email: "", phone: "", profileImage: "", _id: "" });
@@ -94,7 +97,7 @@ function Profile() {
                   preview
                     ? preview
                     : user.profileImage
-                      ? `https://waste-management-2-xsa0.onrender.com/uploads/profiles/${user.profileImage}`
+                      ? `https://waste-management-2-xsa0.onrender.com/Uploads/profiles/${user.profileImage}`
                       : "https://via.placeholder.com/120"
                 }
                 className="relative w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl ring-4 ring-blue-100 transition-transform duration-300 group-hover:scale-105"
