@@ -24,7 +24,7 @@ function Complaints() {
     }
   }, []);
 
- 
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -42,20 +42,20 @@ function Complaints() {
     }
   };
 
- 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
- 
+
     const storedUser = JSON.parse(sessionStorage.getItem("user"));
-    
+
     if (!storedUser || !storedUser._id) {
-       toast.error("User not found. Please login again.");
+      toast.error("User not found. Please login again.");
       return;
     }
 
     const formData = new FormData();
-    formData.append("userId", storedUser._id);  
+    formData.append("userId", storedUser._id);
     formData.append("userName", user.name);
     formData.append("email", user.email);
     formData.append("subject", subject);
@@ -63,12 +63,18 @@ function Complaints() {
     if (image) formData.append("image", image);
 
     try {
+      
+      // const response = await axios.post(
+      //   "https://waste-management-2-xsa0.onrender.com/api/complaints/add",
+      //   formData,
+      //   {
+      //     headers: { "Content-Type": "multipart/form-data" },
+      //   }
+      // );
+
       const response = await axios.post(
         "https://waste-management-2-xsa0.onrender.com/api/complaints/add",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
+        formData
       );
 
       alert("Complaint submitted successfully!");
@@ -81,7 +87,7 @@ function Complaints() {
       }
     } catch (error) {
       console.error("Error submitting complaint:", error);
-       toast.error(error.response?.data?.message || "Error submitting complaint");
+      toast.error(error.response?.data?.message || "Error submitting complaint");
     }
   };
 
