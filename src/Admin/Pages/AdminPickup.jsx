@@ -12,7 +12,7 @@ function AdminPickup() {
   const [statusFilter, setStatusFilter] = useState("All");
   const [loading, setLoading] = useState(true);
 
- 
+
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 8;
 
@@ -136,11 +136,11 @@ function AdminPickup() {
         closeEdit();
         fetchPickups();
       } else {
-         toast.error("Update failed.");
+        toast.error("Update failed.");
       }
     } catch (err) {
       console.error("Save edit error:", err);
-       toast.error("Failed to update pickup.");
+      toast.error("Failed to update pickup.");
     }
   };
 
@@ -154,7 +154,7 @@ function AdminPickup() {
       }
     } catch (err) {
       console.error("Status update error:", err);
-       toast.error("Failed to update status.");
+      toast.error("Failed to update status.");
     }
   };
 
@@ -168,7 +168,8 @@ function AdminPickup() {
 
   const deletePickup = async () => {
     try {
-      const res = await axios.delete(`${BASE}/${deleting._id}`);
+      // const res = await axios.delete(`${BASE}/${deleting._id}`);
+      await axios.delete(`${BASE}/admin/${deleting._id}`);
 
       if (res.data.success) {
         toast.success("Pickup deleted successfully.");
@@ -177,11 +178,11 @@ function AdminPickup() {
       }
     } catch (err) {
       console.error("Delete error:", err);
-       toast.error("Failed to delete pickup.");
+      toast.error("Failed to delete pickup.");
     }
   };
 
-  
+
   const badge = (s) => {
     if (s === "Scheduled") return "bg-blue-100 text-blue-700 border border-blue-200";
     if (s === "Cancelled") return "bg-red-100 text-red-700 border border-red-200";
@@ -615,7 +616,7 @@ function AdminPickup() {
                 <h2 className="text-xl font-bold text-gray-900 text-center mb-2">
                   Delete Pickup?
                 </h2>
-                
+
                 <p className="text-gray-600 text-center mb-6">
                   Are you sure you want to delete this pickup request? This action cannot be undone.
                 </p>
