@@ -419,7 +419,7 @@ function AdminComplaints() {
               )} */}
 
               {/* USER UPLOADED IMAGE */}
-              {/* {selectedComplaint.image && (
+              {selectedComplaint.image && (
                 <div>
                   <label className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
                     Uploaded Image
@@ -442,22 +442,7 @@ function AdminComplaints() {
                     </p>
                   </div>
                 </div>
-              )} */}
-
-              {selectedComplaint.image && (
-                <div>
-                  <label className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
-                    Uploaded Image
-                  </label>
-
-                  <img
-                    src={`https://waste-management-2-xsa0.onrender.com${selectedComplaint.image}`}
-                    alt="Complaint"
-                    className="mt-3 max-h-64 rounded-lg border border-gray-200 object-contain"
-                  />
-                </div>
               )}
-
 
             </div>
 
