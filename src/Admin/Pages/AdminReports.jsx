@@ -41,13 +41,13 @@ function AdminComplaints() {
       setFiltered(res.data.complaints);
     } catch (err) {
       console.error("Fetch error:", err);
-       toast.error("Failed to fetch complaints");
+      toast.error("Failed to fetch complaints");
     } finally {
       setLoading(false);
     }
   };
 
- 
+
   useEffect(() => {
     let result = complaints;
 
@@ -81,7 +81,7 @@ function AdminComplaints() {
       toast.success("Complaint deleted");
     } catch (err) {
       console.error(err);
-       toast.error("Delete failed");
+      toast.error("Delete failed");
     }
   };
 
@@ -108,7 +108,7 @@ function AdminComplaints() {
       toast.success("Complaint updated");
     } catch (err) {
       console.error(err);
-       toast.error("Update failed");
+      toast.error("Update failed");
     }
   };
 
@@ -158,7 +158,7 @@ function AdminComplaints() {
     );
   }
 
- 
+
   return (
     <div className="flex min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="flex-1 p-6 lg:p-8 max-w-7xl mx-auto w-full">
@@ -367,7 +367,7 @@ function AdminComplaints() {
                 <FiX className="w-6 h-6" />
               </button>
             </div>
-            
+
             <div className="p-6 space-y-6">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2 md:col-span-1">
@@ -410,12 +410,40 @@ function AdminComplaints() {
                 <p className="mt-2 text-gray-700 leading-relaxed bg-gray-50 p-4 rounded-lg border border-gray-200">{selectedComplaint.message}</p>
               </div>
 
+              {/* 
               {selectedComplaint.adminRemarks && (
                 <div>
                   <label className="text-sm font-semibold text-gray-600 uppercase tracking-wide">Admin Remarks</label>
                   <p className="mt-2 text-gray-700 leading-relaxed bg-green-50 p-4 rounded-lg border border-green-200">{selectedComplaint.adminRemarks}</p>
                 </div>
+              )} */}
+
+              {/* USER UPLOADED IMAGE */}
+              {selectedComplaint.image && (
+                <div>
+                  <label className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
+                    Uploaded Image
+                  </label>
+
+                  <div className="mt-3">
+                    <img
+                      src={`https://waste-management-2-xsa0.onrender.com${selectedComplaint.image}`}
+                      alt="Complaint"
+                      className="max-w-full h-auto rounded-xl border border-gray-200 shadow-sm cursor-pointer hover:shadow-md transition"
+                      onClick={() =>
+                        window.open(
+                          `https://waste-management-2-xsa0.onrender.com${selectedComplaint.image}`,
+                          "_blank"
+                        )
+                      }
+                    />
+                    <p className="text-xs text-gray-500 mt-2">
+                      Click image to view full size
+                    </p>
+                  </div>
+                </div>
               )}
+
             </div>
 
             <div className="p-6 bg-gray-50 border-t border-gray-200 rounded-b-2xl">
