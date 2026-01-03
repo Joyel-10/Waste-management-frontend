@@ -183,13 +183,24 @@ function AdminPickup() {
   //   }
   // };
 
-
   const deletePickup = async () => {
+    const id = deleting?._id;
+    if (!id) return;
+
     try {
       const token = sessionStorage.getItem("adminToken");
 
-      const res = await axios.delete(
-        `${BASE}/admin/${deleting._id}`,
+      if (!token) {
+        toast.error("Admin login required");
+        return;
+      }
+
+
+      closeDeleteModal();
+      setDeleting(null);
+
+      await axios.delete(
+        `${BASE}/admin/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -197,15 +208,17 @@ function AdminPickup() {
         }
       );
 
-      toast.success(res.data.message);
-      closeDeleteModal();
-      fetchPickups();
+      toast.success("Pickup deleted successfully");
+
+
+      setPickups(prev => prev.filter(p => p._id !== id));
 
     } catch (err) {
-      console.error(err);
-      toast.error("Failed to delete pickup");
+      console.error("Delete error:", err.response || err);
+      toast.error(err.response?.data?.message || "Failed to delete pickup");
     }
   };
+
 
 
   const badge = (s) => {
