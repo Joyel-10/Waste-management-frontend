@@ -182,8 +182,11 @@ function AdminPickup() {
   //     toast.error("Failed to delete pickup.");
   //   }
   // };
-  
+
   const deletePickup = async () => {
+    const id = deleting?._id;
+    if (!id) return;
+
     try {
       const token = sessionStorage.getItem("adminToken");
 
@@ -192,8 +195,12 @@ function AdminPickup() {
         return;
       }
 
-      const res = await axios.delete(
-        `${BASE}/admin/${deleting._id}`,
+
+      closeDeleteModal();
+      setDeleting(null);
+
+      await axios.delete(
+        `${BASE}/admin/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -201,18 +208,16 @@ function AdminPickup() {
         }
       );
 
-      if (res.data.success) {
-        toast.success("Pickup deleted successfully");
-        closeDeleteModal();
-        fetchPickups();
-      }
+      toast.success("Pickup deleted successfully");
+
+
+      setPickups(prev => prev.filter(p => p._id !== id));
 
     } catch (err) {
       console.error("Delete error:", err.response || err);
       toast.error(err.response?.data?.message || "Failed to delete pickup");
     }
   };
-
 
 
 
