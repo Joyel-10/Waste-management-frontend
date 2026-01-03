@@ -182,7 +182,6 @@ function AdminPickup() {
   //   }
   // };
 
-
   const deletePickup = async () => {
     try {
       const token = sessionStorage.getItem("adminToken");
@@ -193,7 +192,7 @@ function AdminPickup() {
       }
 
       const res = await axios.delete(
-        `${BASE}/${deleting._id}`,
+        `${BASE}/admin/${deleting._id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -211,7 +210,6 @@ function AdminPickup() {
       toast.error(err.response?.data?.message || "Failed to delete pickup.");
     }
   };
-
 
 
 
