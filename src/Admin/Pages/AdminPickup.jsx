@@ -167,50 +167,51 @@ function AdminPickup() {
     setDeleting(null);
   };
 
-  // const deletePickup = async () => {
-  //   try {
-  //     // const res = await axios.delete(`${BASE}/${deleting._id}`);
-  //     await axios.delete(`${BASE}/admin/${deleting._id}`);
-
-  //     if (res.data.success) {
-  //       toast.success("Pickup deleted successfully.");
-  //       closeDeleteModal();
-  //       fetchPickups();
-  //     }
-  //   } catch (err) {
-  //     console.error("Delete error:", err);
-  //     toast.error("Failed to delete pickup.");
-  //   }
-  // };
   const deletePickup = async () => {
     try {
-      const token = sessionStorage.getItem("adminToken");
-
-      if (!token) {
-        toast.error("Admin login required");
-        return;
-      }
-
-      const res = await axios.delete(
-        `${BASE}/admin/${deleting._id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      // const res = await axios.delete(`${BASE}/${deleting._id}`);
+      await axios.delete(`${BASE}/admin/${deleting._id}`);
 
       if (res.data.success) {
-        toast.success("Pickup deleted successfully");
+        toast.success("Pickup deleted successfully.");
         closeDeleteModal();
         fetchPickups();
       }
-
     } catch (err) {
-      console.error("Delete error:", err.response || err);
-      toast.error(err.response?.data?.message || "Failed to delete pickup");
+      console.error("Delete error:", err);
+      toast.error("Failed to delete pickup.");
     }
   };
+
+  // const deletePickup = async () => {
+  //   try {
+  //     const token = sessionStorage.getItem("adminToken");
+
+  //     if (!token) {
+  //       toast.error("Admin login required");
+  //       return;
+  //     }
+
+  //     const res = await axios.delete(
+  //       `${BASE}/admin/${deleting._id}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+
+  //     if (res.data.success) {
+  //       toast.success("Pickup deleted successfully");
+  //       closeDeleteModal();
+  //       fetchPickups();
+  //     }
+
+  //   } catch (err) {
+  //     console.error("Delete error:", err.response || err);
+  //     toast.error(err.response?.data?.message || "Failed to delete pickup");
+  //   }
+  // };
 
 
 
