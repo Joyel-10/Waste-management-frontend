@@ -5,6 +5,7 @@ import { FiSearch, FiEdit, FiTrash2, FiEye, FiX, FiCalendar, FiClock, FiPackage,
 
 const BASE = "https://waste-management-2-xsa0.onrender.com/api/pickup";
 
+
 function AdminPickup() {
   const [pickups, setPickups] = useState([]);
   const [filtered, setFiltered] = useState([]);
@@ -181,13 +182,12 @@ function AdminPickup() {
   //     toast.error("Failed to delete pickup.");
   //   }
   // };
-
   const deletePickup = async () => {
     try {
       const token = sessionStorage.getItem("adminToken");
 
       if (!token) {
-        toast.error("Session expired. Please login again.");
+        toast.error("Admin login required");
         return;
       }
 
@@ -201,15 +201,17 @@ function AdminPickup() {
       );
 
       if (res.data.success) {
-        toast.success("Pickup deleted successfully.");
+        toast.success("Pickup deleted successfully");
         closeDeleteModal();
         fetchPickups();
       }
+
     } catch (err) {
-      console.error("Delete error:", err);
-      toast.error(err.response?.data?.message || "Failed to delete pickup.");
+      console.error("Delete error:", err.response || err);
+      toast.error(err.response?.data?.message || "Failed to delete pickup");
     }
   };
+
 
 
 
