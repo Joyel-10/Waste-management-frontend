@@ -182,16 +182,23 @@ function AdminPickup() {
   //     toast.error("Failed to delete pickup.");
   //   }
   // };
+
   const deletePickup = async () => {
     const id = deleting?._id;
-    if (!id) return;
+    console.log("🗑️ DELETE CLICKED - ID:", id);
+
+    if (!id) {
+      console.log("❌ No ID found");
+      return;
+    }
 
     try {
       const token = sessionStorage.getItem("adminToken");
+      console.log("🔑 Token found:", token ? "YES" : "NO");
 
       if (!token) {
         toast.error("Admin login required");
-        closeDeleteModal();  // Close modal before return
+        closeDeleteModal();
         return;
       }
 
@@ -200,6 +207,8 @@ function AdminPickup() {
 
       // Close modal immediately for better UX
       closeDeleteModal();
+
+      console.log("📡 Making DELETE request to:", `${BASE}/admin/${id}`);
 
       // Make the API call
       const response = await axios.delete(
@@ -211,22 +220,34 @@ function AdminPickup() {
         }
       );
 
+      console.log("✅ DELETE Response:", response.data);
+
       // Only update state after successful deletion
       if (response.data.success) {
         toast.success("Pickup deleted successfully");
+        console.log("✅ Removing from state...");
 
         // Update state immediately for instant UI feedback
-        setPickups(prev => prev.filter(p => p._id !== id));
+        setPickups(prev => {
+          const newPickups = prev.filter(p => p._id !== id);
+          console.log("📊 Pickups before:", prev.length, "After:", newPickups.length);
+          return newPickups;
+        });
       } else {
+        console.log("❌ Response success = false");
         toast.error("Failed to delete pickup");
       }
 
     } catch (err) {
-      console.error("Delete error:", err.response || err);
+      console.error("❌ DELETE ERROR Full:", err);
+      console.error("❌ DELETE ERROR Response:", err.response);
+      console.error("❌ DELETE ERROR Status:", err.response?.status);
+      console.error("❌ DELETE ERROR Data:", err.response?.data);
 
       // More specific error messages
       if (err.response?.status === 404) {
         toast.error("Pickup not found or already deleted");
+        console.log("🔄 Removing from state anyway (404)");
         // Still remove from local state if it's a 404
         setPickups(prev => prev.filter(p => p._id !== id));
       } else if (err.response?.status === 401 || err.response?.status === 403) {
@@ -236,6 +257,7 @@ function AdminPickup() {
       }
     }
   };
+
 
 
   const badge = (s) => {
