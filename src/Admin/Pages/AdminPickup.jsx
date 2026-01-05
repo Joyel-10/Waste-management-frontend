@@ -182,7 +182,6 @@ function AdminPickup() {
   //     toast.error("Failed to delete pickup.");
   //   }
   // };
-
   const deletePickup = async () => {
     const id = deleting?._id;
     if (!id) return;
@@ -192,14 +191,18 @@ function AdminPickup() {
 
       if (!token) {
         toast.error("Admin login required");
+        closeDeleteModal();  // Close modal before return
         return;
       }
 
+      // Show loading state
+      toast.info("Deleting pickup...");
 
+      // Close modal immediately for better UX
       closeDeleteModal();
-      setDeleting(null);
 
-      await axios.delete(
+      // Make the API call
+      const response = await axios.delete(
         `${BASE}/admin/${id}`,
         {
           headers: {
@@ -208,17 +211,31 @@ function AdminPickup() {
         }
       );
 
-      toast.success("Pickup deleted successfully");
+      // Only update state after successful deletion
+      if (response.data.success) {
+        toast.success("Pickup deleted successfully");
 
-
-      setPickups(prev => prev.filter(p => p._id !== id));
+        // Update state immediately for instant UI feedback
+        setPickups(prev => prev.filter(p => p._id !== id));
+      } else {
+        toast.error("Failed to delete pickup");
+      }
 
     } catch (err) {
       console.error("Delete error:", err.response || err);
-      toast.error(err.response?.data?.message || "Failed to delete pickup");
+
+      // More specific error messages
+      if (err.response?.status === 404) {
+        toast.error("Pickup not found or already deleted");
+        // Still remove from local state if it's a 404
+        setPickups(prev => prev.filter(p => p._id !== id));
+      } else if (err.response?.status === 401 || err.response?.status === 403) {
+        toast.error("Unauthorized. Please login again.");
+      } else {
+        toast.error(err.response?.data?.message || "Failed to delete pickup");
+      }
     }
   };
-
 
 
   const badge = (s) => {
