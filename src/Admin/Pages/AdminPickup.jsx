@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import AppSidebar from "../Components/AdSideBar";
 import axios from "axios";
 import { FiSearch, FiEdit, FiTrash2, FiEye, FiX, FiCalendar, FiClock, FiPackage, FiDollarSign, FiUser, FiMail, FiAlertTriangle } from "react-icons/fi";
+import { toast } from "react-toastify";
+
 
 const BASE = "https://waste-management-2-xsa0.onrender.com/api/pickup";
 
@@ -185,16 +187,16 @@ function AdminPickup() {
 
   const deletePickup = async () => {
     const id = deleting?._id;
-    console.log("🗑️ DELETE CLICKED - ID:", id);
+    console.log(" DELETE CLICKED - ID:", id);
 
     if (!id) {
-      console.log("❌ No ID found");
+      console.log(" No ID found");
       return;
     }
 
     try {
       const token = sessionStorage.getItem("adminToken");
-      console.log("🔑 Token found:", token ? "YES" : "NO");
+      console.log(" Token found:", token ? "YES" : "NO");
 
       if (!token) {
         toast.error("Admin login required");
@@ -202,15 +204,15 @@ function AdminPickup() {
         return;
       }
 
-      // Show loading state
+
       toast.info("Deleting pickup...");
 
-      // Close modal immediately for better UX
+
       closeDeleteModal();
 
       console.log("📡 Making DELETE request to:", `${BASE}/admin/${id}`);
 
-      // Make the API call
+
       const response = await axios.delete(
         `${BASE}/admin/${id}`,
         {
@@ -220,35 +222,34 @@ function AdminPickup() {
         }
       );
 
-      console.log("✅ DELETE Response:", response.data);
+      console.log(" DELETE Response:", response.data);
 
-      // Only update state after successful deletion
+
       if (response.data.success) {
         toast.success("Pickup deleted successfully");
-        console.log("✅ Removing from state...");
+        console.log(" Removing from state...");
 
-        // Update state immediately for instant UI feedback
         setPickups(prev => {
           const newPickups = prev.filter(p => p._id !== id);
-          console.log("📊 Pickups before:", prev.length, "After:", newPickups.length);
+          console.log(" Pickups before:", prev.length, "After:", newPickups.length);
           return newPickups;
         });
       } else {
-        console.log("❌ Response success = false");
+        console.log(" Response success = false");
         toast.error("Failed to delete pickup");
       }
 
     } catch (err) {
-      console.error("❌ DELETE ERROR Full:", err);
-      console.error("❌ DELETE ERROR Response:", err.response);
-      console.error("❌ DELETE ERROR Status:", err.response?.status);
-      console.error("❌ DELETE ERROR Data:", err.response?.data);
+      console.error(" DELETE ERROR Full:", err);
+      console.error(" DELETE ERROR Response:", err.response);
+      console.error(" DELETE ERROR Status:", err.response?.status);
+      console.error(" DELETE ERROR Data:", err.response?.data);
 
-      // More specific error messages
+
       if (err.response?.status === 404) {
         toast.error("Pickup not found or already deleted");
-        console.log("🔄 Removing from state anyway (404)");
-        // Still remove from local state if it's a 404
+        console.log(" Removing from state anyway (404)");
+
         setPickups(prev => prev.filter(p => p._id !== id));
       } else if (err.response?.status === 401 || err.response?.status === 403) {
         toast.error("Unauthorized. Please login again.");
