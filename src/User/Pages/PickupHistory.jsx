@@ -64,7 +64,7 @@
 
 //     return (
 //         <>
-           
+
 //             <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 pb-20 px-4 sm:px-6 lg:px-8 py-8 flex justify-center">
 //                 <div className="w-full max-w-4xl">
 //                     {/* Header */}
@@ -215,7 +215,7 @@ function PickupHistory() {
             navigate("/login");
             return;
         }
-        
+
         fetchHistory(userId);
     }, [navigate]);
 
@@ -235,15 +235,15 @@ function PickupHistory() {
 
     const handleCancel = async (pickupId) => {
         setCancellingId(pickupId);
-        
+
         try {
             await axios.delete(
                 `https://waste-management-2-xsa0.onrender.com/api/pickup/cancel/${pickupId}`
             );
 
             toast.success("Pickup cancelled successfully!");
-            
-            
+
+
             setPickupData((prev) =>
                 prev.map((p) =>
                     p._id === pickupId ? { ...p, status: "Cancelled" } : p
@@ -316,11 +316,10 @@ function PickupHistory() {
                                                     <span className="font-medium">{pickup.date} at {pickup.time}</span>
                                                 </div>
 
-                                                <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${
-                                                    pickup.status === "Completed" ? "bg-emerald-100 text-emerald-700" :
-                                                    pickup.status === "Cancelled" ? "bg-rose-100 text-rose-700" :
-                                                    "bg-amber-100 text-amber-700"
-                                                }`}>
+                                                <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${pickup.status === "Completed" ? "bg-emerald-100 text-emerald-700" :
+                                                        pickup.status === "Cancelled" ? "bg-rose-100 text-rose-700" :
+                                                            "bg-amber-100 text-amber-700"
+                                                    }`}>
                                                     {pickup.status}
                                                 </span>
                                             </div>

@@ -63,21 +63,13 @@ function Complaints() {
     if (image) formData.append("image", image);
 
     try {
-      
-      // const response = await axios.post(
-      //   "https://waste-management-2-xsa0.onrender.com/api/complaints/add",
-      //   formData,
-      //   {
-      //     headers: { "Content-Type": "multipart/form-data" },
-      //   }
-      // );
 
       const response = await axios.post(
         "https://waste-management-2-xsa0.onrender.com/api/complaints/add",
         formData
       );
 
-      alert("Complaint submitted successfully!");
+      toast.success("Complaint submitted successfully!");
       setSubject("");
       setMessage("");
       setImage(null);
@@ -112,7 +104,7 @@ function Complaints() {
 
           <div className="space-y-6 mt-2">
 
-            {/* Name */}
+
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide">
                 Name
@@ -125,7 +117,7 @@ function Complaints() {
               />
             </div>
 
-            {/* Email */}
+
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide">
                 Email
@@ -138,7 +130,7 @@ function Complaints() {
               />
             </div>
 
-            {/* Subject */}
+
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide">
                 Subject
@@ -153,7 +145,7 @@ function Complaints() {
               />
             </div>
 
-            {/* Message */}
+
             <div>
               <label className="block text-gray-700 font-semibold mb-2 text-sm uppercase tracking-wide">
                 Message
@@ -168,7 +160,7 @@ function Complaints() {
               ></textarea>
             </div>
 
-            {/* Image Upload */}
+
             <div>
               <label className="block text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">
                 Attach Image (optional)
@@ -259,7 +251,7 @@ function Complaints() {
         </form>
       </main>
 
-      {/* Bottom Navigation */}
+
       <AppSidebar />
     </div>
   );

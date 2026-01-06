@@ -14,8 +14,6 @@ function AdminPickup() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("All");
   const [loading, setLoading] = useState(true);
-
-
   const [page, setPage] = useState(1);
   const PAGE_SIZE = 8;
 
